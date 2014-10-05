@@ -1,0 +1,55 @@
+/* NHN TS UI Development ChoiSungKyu */
+
+/* Common */
+body,p,h1,h2,h3,h4,h5,h6,menu,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:'돋움',dotum,Helvetica,sans-serif;font-size:12px;line-height:normal}
+html,body{height:100%}
+img,fieldset{border:0}
+menu,ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:hover,a:active,a:focus{text-decoration:underline}
+table{border-collapse:collapse;border-spacing:none}
+button[disabled=disabled]{cursor:default !important}
+body{_width:100%;_height:100%;background-repeat:repeat-y}
+button{margin:0;padding:0;border:0;background:none;cursor:pointer}
+input[type=image],input[type=text],input[type=submit],input[type=password],textarea{-webkit-appearance:none;-webkit-border-radius:0;resize:none}
+.blind{visibility:hidden;overflow:hidden;position:absolute;top:0;left:0;width:0;height:0;font-size:0;line-height:0}
+iframe{vertical-align:top}
+
+body{background-color: #000000;color:#ffffff;}
+.wrap{margin: 30px auto 0 auto;}
+.board_wrap{margin-top: 10px;width:400px;margin:0 auto 10px auto;}
+.win_num{margin-top: 40px;}
+.win_num span{font-size: 60px;}
+.win_num.left{margin-right:10px; float:left;}
+.win_num.right{margin-left:0px; float:right;}
+
+.board{width:300px;height:150px;border: 3px solid #ffffff;border-radius: 10px;display:inline-block;}
+.board_inner p{font-size: 15px;text-align: center;margin-top: 42px;}
+.board_inner .btn_wrap{margin:20px 0 0 98px;}
+.board_inner .btn_wrap.two_btns{margin:20px 0 0 33px;}
+.board_inner button{height: 28px;width:100px;background-color: #ffffff;border-radius: 6px;display: inline-block;}
+.board_inner .two_btns button{margin-left: 10px;}
+.board_inner .only_txt{margin-top:66px;}
+
+.player_wrap{margin:0 auto;max-width:720px; }
+.player{width:350px;height:175px;display: inline-block;border: 3px solid #ffffff;border-radius: 10px;}
+.player_info{margin: 20px;height:135px;}
+.gauge{font-size: 12px;font-weight: 700;float:left;}
+.lv{width:70px;height: 24px;line-height: 24px;border: 1px solid #ffffff;text-align: center;}
+.lv.on{color:#000000;background-color:#ffffff;}
+
+.number{float:left;margin-left: 38px;}
+.number .value{font-size: 60px;width:100px;height: 100px;line-height: 100px;text-align: center;}
+.player.two .number .value{height:130px;line-height: 130px;}
+.number input{width:60px;height: 24px;border-radius: 4px;}
+.number button{background-color: #ffffff;padding: 5px;margin-left: 2px;}
+
+.mark{float:left;height:46px;width:46px;line-height:46px;border-radius: 70px;background-color: #000000;border: 2px solid #ffffff;text-align: center;margin: 44px 0 0 30px;}
+.mrk_txt{font-size: 14px;width: 46px;}
+.mrk_wht_txt{display: none;}
+
+.mark.on{background-color: #ffffff;color:#000000;}
+.mark.on .mrk_blk_txt{display: none;}
+.mark.on .mrk_wht_txt{display: block;}

@@ -1,0 +1,53 @@
+extends layout
+
+block content
+    .wrap
+      .board_wrap
+        .win_num.left
+          span 0
+        .board
+          .board_inner
+            p 상대방을 찾아보세요
+            .btn_wrap
+              button(type='button') 찾아보기
+          .board_inner(style='display: none;')
+            p 다시 게임을 시작하시겠습니까?
+            .btn_wrap.two_btns
+              button(type='button') 한 게임 더
+              button(type='button') 나가기
+          .board_inner(style='display: none;')
+            p.only_txt 숫자를 입력해주세요
+        .win_num.right
+          span 0
+      .player_wrap
+        .player.one
+          .player_info
+            .gauge
+              .lv._lv5.on 100 ~ 81
+              .lv._lv4.on 80 ~ 61
+              .lv._lv3.on 60 ~ 41
+              .lv._lv2.on 40 ~ 21
+              .lv._lv1.on 20 ~ 0
+            .number
+              .value_wrap
+                .value ?
+              .input
+                input(type='text')
+                button(type='button') 입력
+            .mark
+              span.mrk_txt.mrk_blk_txt 흑
+              span.mrk_txt.mrk_wht_txt 백
+        .player.two
+          .player_info
+            .gauge
+              .lv._lv5 100 ~ 81
+              .lv._lv4 80 ~ 61
+              .lv._lv3 60 ~ 41
+              .lv._lv2 40 ~ 21
+              .lv._lv1 20 ~ 0
+            .number
+              .value_wrap
+                .value ?
+            .mark.on
+              span.mrk_txt.mrk_blk_txt 흑
+              span.mrk_txt.mrk_wht_txt 백
