@@ -59,7 +59,9 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(app.get('port'), function() {
+var server = app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
+
+require('./modules/socket')(server);
 

@@ -1,15 +1,20 @@
-extends layout
-
-block content
+doctype html
+html(lang='ko')
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    title= title
+    script(src='/javascripts/libs/jquery-1.11.1.min.js')
+    link(rel='stylesheet', href='/stylesheets/index.css')
+  body
     .wrap
       .board_wrap
         .win_num.left
           span 0
         .board
           .board_inner
-            p 상대방을 찾아보세요
+            p 새로운 게임을 시작하세요
             .btn_wrap
-              button(type='button') 찾아보기
+              button._enter(type='button') 입장하기
           .board_inner(style='display: none;')
             p 다시 게임을 시작하시겠습니까?
             .btn_wrap.two_btns
@@ -51,3 +56,9 @@ block content
             .mark.on
               span.mrk_txt.mrk_blk_txt 흑
               span.mrk_txt.mrk_wht_txt 백
+    script(type='text/javascript', src='/socket.io/socket.io.js')
+    script(type='text/javascript', src='/javascripts/bw.js')
+    script(type='text/javascript', src='/javascripts/bw.socket.js')
+    script(type='text/javascript', src='/javascripts/bw.view.js')
+    script(type='text/javascript').
+       bw.main.init();
