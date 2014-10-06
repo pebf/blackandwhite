@@ -9,6 +9,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.set('port', process.env.PORT || 3000);
 // view engine setup
@@ -63,5 +65,5 @@ var server = app.listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
-require('./modules/socket')(server);
+require('./modules/socket')(server, io);
 

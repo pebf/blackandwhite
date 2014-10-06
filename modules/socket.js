@@ -1,27 +1,13 @@
 var UserManager = require('./user_manager');
 var Match = require('./match');
 
-module.exports = function(app) {
-	var io
-		, allClients = [];
+module.exports = function(server, io) {
+	var allClients = [];
 
-	// var init = function() {		
-		io = require('socket.io').listen(app);
-
-		// io.configure(function() {
-		// 	io.set('log level', 2);
-		// 	io.set('transports'
-		// 		, [ 'websocket'
-		// 		, 'flashsocket'
-		// 		, 'htmlfile'
-		// 		, 'xhr-polling'
-		// 		, 'jsonp-polling'
-		// 	]);
-		// });
-
-		// io.of('/')
-			io.on('connection', onSocket);
-	// };
+	var init = function() {
+		io.listen(server);
+		io.on('connection', onSocket);
+	};
 
 	var onSocket = function(socket) {
 		socket.on('enter', receiveEnter.bind(this, socket));
