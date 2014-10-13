@@ -1,16 +1,15 @@
 var Utils = require('./utils');
 
-module.exports = function() {
+module.exports = (function() {
+	exports = {};
 	//var aUserList = [];
 
-	var createUser = function() {
-		var htUser = {};
-		htUser.id = createUserId();
-
+	exports.createUser = function() {
+		var htUser = { sUserId : createUserId()};
 		//addUserToList(htUser);
 		return htUser;
 	};
-
+	
 	var createUserId = function() {
 		return Utils.getDateddssSS() + Utils.getRandom();
 	};
@@ -26,4 +25,6 @@ module.exports = function() {
 	// 		}
 	// 	});
 	// };
-}
+
+	return exports;
+}());

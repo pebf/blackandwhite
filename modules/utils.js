@@ -1,5 +1,7 @@
-module.exports = function() {
-	var getDateddssSS = function() {
+module.exports = (function() {
+	exports = {};
+
+	exports.getDateddssSS = function() {
 		var oDate = new Date()
 
 		return '' + oDate.getDate()
@@ -7,7 +9,9 @@ module.exports = function() {
 			+ oDate.getMilliseconds();		
 	};
 
-	var getRandom = function() {
+	exports.getRandom = function() {
 		return Math.floor(Math.random() * 100) + 1;
 	};
-};
+
+	return exports;
+}());

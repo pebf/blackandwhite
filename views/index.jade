@@ -10,18 +10,25 @@ html(lang='ko')
       .board_wrap
         .win_num.left
           span 0
-        .board
-          .board_inner
+        .board._board
+          .board_inner._board_new_game
             p 새로운 게임을 시작하세요
             .btn_wrap
-              button._enter(type='button') 입장하기
-          .board_inner(style='display: none;')
+              button._enter(type='button') 입장하기          
+          .board_inner._board_input_number(style='display: none;')
+            p.only_txt 숫자를 입력해주세요          
+          .board_inner._board_restart(style='display: none;')
             p 다시 게임을 시작하시겠습니까?
             .btn_wrap.two_btns
-              button(type='button') 한 게임 더
-              button(type='button') 나가기
-          .board_inner(style='display: none;')
-            p.only_txt 숫자를 입력해주세요
+              button._game_restart(type='button') 한 게임 더
+              button._game_leave(type='button') 나가기
+          .board_inner._board_wait(style='display: none;')
+            p.only_txt 상대를 기다리는 중입니다.
+          .board_inner._board_opponent_leave(style='display: none;')
+            p.dbl_txt 상대방이 나갔습니다.
+              br
+              br
+              다음 상대를 기다리는 중입니다.
         .win_num.right
           span 0
       .player_wrap
@@ -39,7 +46,7 @@ html(lang='ko')
               .input
                 input(type='text')
                 button(type='button') 입력
-            .mark
+            .mark(style='display: none;')
               span.mrk_txt.mrk_blk_txt 흑
               span.mrk_txt.mrk_wht_txt 백
         .player.two
@@ -53,12 +60,13 @@ html(lang='ko')
             .number
               .value_wrap
                 .value ?
-            .mark.on
+            .mark.on(style='display: none;')
               span.mrk_txt.mrk_blk_txt 흑
               span.mrk_txt.mrk_wht_txt 백
     script(type='text/javascript', src='/socket.io/socket.io.js')
-    script(type='text/javascript', src='/javascripts/bw.js')
+    script(type='text/javascript', src='/javascripts/bw.main.js')
     script(type='text/javascript', src='/javascripts/bw.socket.js')
     script(type='text/javascript', src='/javascripts/bw.view.js')
+    script(type='text/javascript', src='/javascripts/bw.process.js')
     script(type='text/javascript').
        bw.main.init();

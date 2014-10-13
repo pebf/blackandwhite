@@ -1,8 +1,8 @@
 bw.socket = (function(){
-	var view;
+	var process;
 
 	var _setDependency = function() {
-		view = bw.view;
+		process = bw.process;
 	};
 
 	var exports = {
@@ -17,13 +17,15 @@ bw.socket = (function(){
 	};
 
 	var _attachSocketEvent = function() {
-		oSocket = io.connect('/');
-		oSocket
-			.on('enter_end', function(){console.log('enter_end')});
+		oSocket = io.connect('/')
+			.on('enter_end', process.receiveEnterEnd)
+			.on('game_start', process.gameStart)
+			.on('opponent_leave', process.opponentLeave)
+			.on('restart', process.restart);
 	};
 
-	exports.sendEnter = function() {
-		oSocket.emit('enter');
+	exports.send = function(sEvt, htData) {
+		oSocket.emit(sEvt, htData);
 	};
 
 	return exports;

@@ -26,12 +26,13 @@ body{background-color: #000000;color:#ffffff;}
 .win_num.right{margin-left:0px; float:right;}
 
 .board{width:300px;height:150px;border: 3px solid #ffffff;border-radius: 10px;display:inline-block;}
-.board_inner p{font-size: 15px;text-align: center;margin-top: 42px;}
+.board_inner p{font-size: 15px;text-align: center;margin-top: 42px;text-indent: -5px;}
 .board_inner .btn_wrap{margin:20px 0 0 98px;}
 .board_inner .btn_wrap.two_btns{margin:20px 0 0 33px;}
 .board_inner button{height: 28px;width:100px;background-color: #ffffff;border-radius: 6px;display: inline-block;}
 .board_inner .two_btns button{margin-left: 10px;}
 .board_inner .only_txt{margin-top:66px;}
+.board_inner .dbl_txt{margin-top: 48px;}
 
 .player_wrap{margin:0 auto;max-width:720px; }
 .player{width:350px;height:175px;display: inline-block;border: 3px solid #ffffff;border-radius: 10px;}
