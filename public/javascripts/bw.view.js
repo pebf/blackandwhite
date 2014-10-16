@@ -1,4 +1,10 @@
 bw.view = (function() {
+	var main;
+
+	var _setDependency = function() {
+		main = bw.main;
+	};
+
 	var exports = {
 		name : 'bw.view'
 	};
@@ -7,6 +13,7 @@ bw.view = (function() {
 
 	exports.init = function() {
 		_assignHTML();
+		_setDependency();
 	};
 
 	var _assignHTML = function() {
@@ -16,6 +23,11 @@ bw.view = (function() {
 		_htElement.board_restart = _htElement.board.find('._board_restart');
 		_htElement.board_wait = _htElement.board.find('._board_wait');
 		_htElement.board_opponent_leave = _htElement.board.find('._board_opponent_leave');
+
+		_htElement.user_score = $('._user_score');
+		_htElement.user_gauge = $('._user_guage');
+		_htElement.opponent_score = $('._opponent_score');
+		_htElement.opponent_gauge = $('._opponent_guage');
 	};
 
 	var _hideBoardInnerLayer = function() {
@@ -40,6 +52,47 @@ bw.view = (function() {
 	exports.showOpponentLeaveLayer = function() {
 		_hideBoardInnerLayer();
 		_htElement.board_opponent_leave.show();
+	};
+
+	exports.showMatchInfo = function(htMatch) {		
+		var aUserList = htMatch.aUserList
+			, sUserId = main.getUserId()
+			, htUser, htOpponent;
+
+		aUserList.forEach(function(value) {
+			if (value.sUserId === sUserId) {
+				htUser = value;
+			} else {
+				htOpponent = value;
+			}
+		});
+
+		_showUserInfo(htUser);
+		_showOpponentInfo(htOpponent);
+	};
+
+	var _showUserInfo = function(htUser) {
+		_htElement.user_score.html(htUser.nMatchScore);
+		_fillUserGauge(_htElement.user_gauge, htUser.nTotalNumber);
+	};
+
+	var _showOpponentInfo = function(htOpponent) {
+		_htElement.opponent_score.html(htOpponent.nMatchScore);
+		_fillUserGauge(_htElement.opponent_gauge, htOpponent.nTotalNumber);	
+	};
+
+	/**
+	 * 점수에 맞게 게이지를 채운다.
+	 */
+	var _fillUserGauge = function(welGauge, nNum) {		
+		var nBlockNumToFill = Math.floor(nNum / 20)
+			, waelGaugeBlock = welGauge.find('._guage_block')
+								.removeClass('on');
+
+		for(var i = 4; i > -1; i--) {
+			$(waelGaugeBlock[i]).addClass('on');
+		}
+
 	};
 
 	return exports;

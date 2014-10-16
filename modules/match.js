@@ -1,4 +1,5 @@
-var Utils = require('./utils');
+var Utils = require('./utils')
+	, User = require('./user');
 
 module.exports = (function() {
 	var exports = {};
@@ -8,8 +9,9 @@ module.exports = (function() {
 	var createMatch = function(htUser) {
 		var htMatch = {
 			sMatchId : createMatchId()
-			, aPlayerList : [htUser]
+			, aUserList : [htUser]
 			, nRound : 0
+			, aUserHasTurn : []
 		};
 
 		addMatchToList(htMatch);
@@ -21,7 +23,7 @@ module.exports = (function() {
 	};
 
 	var addUserToMatch = function (htMatch, htUser) {
-		htMatch.aPlayerList.push(htUser);
+		htMatch.aUserList.push(htUser);
 	};
 
 	var addMatchToList = function(htMatch) {
@@ -35,16 +37,16 @@ module.exports = (function() {
 		for (var i = 0; i < aMatchList.length; i++) {
 			htMatch = aMatchList[i];
 
-			if (!htMatch.aPlayerList) {
+			if (!htMatch.aUserList) {
 				continue;
 			}
 
-			if (htMatch.aPlayerList.length > 1) {
+			if (htMatch.aUserList.length > 1) {
 				continue;
 			}
 
 			// 플레이어가 없는 매치는 리스트에서 제거
-			if (htMatch.aPlayerList.length == 0) {
+			if (htMatch.aUserList.length == 0) {
 				arr.splice(index, 1);
 			}
 
@@ -68,7 +70,7 @@ module.exports = (function() {
 	};
 
 	exports.isMatchFull = function(htMatch) {
-		if (htMatch.aPlayerList && htMatch.aPlayerList.length > 1) {
+		if (htMatch.aUserList && htMatch.aUserList.length > 1) {
 			return true;
 		}
 		return false;
@@ -79,11 +81,11 @@ module.exports = (function() {
 	 */
 	exports.removePlayer = function(sMatchId, sUserId) {
 		var htMatch = exports.getMatchById(sMatchId)
-			, aPlayerList = htMatch.aPlayerList;
+			, aUserList = htMatch.aUserList;
 		
-		for (var i = 0, nLength = aPlayerList.length; i < nLength; i++) {			
-			if (aPlayerList[i].sUserId === sUserId)	{
-				aPlayerList.splice(i, 1);
+		for (var i = 0, nLength = aUserList.length; i < nLength; i++) {			
+			if (aUserList[i].sUserId === sUserId)	{
+				aUserList.splice(i, 1);
 				return;
 			}
 		}
@@ -95,7 +97,7 @@ module.exports = (function() {
 	 * match에 참여하고 있는 player가 없다면 aMatchList에서 match를 제거한다.
 	 */
 	var _removeMatchHasNoPlayer = function(htMatch) {
-		if (htMatch.aPlayerList.length > 0) {
+		if (htMatch.aUserList.length > 0) {
 			return;
 		}
 
@@ -116,5 +118,30 @@ module.exports = (function() {
 		}
 	};
 
+	exports.initMatch = function(htMatch) {
+		initMatchData(htMatch);
+		decisionFirstUser(htMatch);
+	};
+
+	var initMatchData = function(htMatch) {
+		var aUserList = htMatch.aUserList;
+		htMatch.aUserHasTurn = [];
+		htMatch.nRound = 0; 
+
+		aUserList.forEach(function(htUser) {
+			User.initUserForMatch(htUser);
+		});
+	};
+
+	var decisionFirstUser = function(htMatch) {
+		var nRandom = Math.floor(Math.random())
+			, nNext = nRandom === 1 ? 0 : 1
+			, aUserList = htMatch.aUserList
+			, aUserHasTurn = htMatch.aUserHasTurn;
+		
+		aUserHasTurn.push(aUserList[nRandom].sUserId);
+		aUserHasTurn.push(aUserList[nNext].sUserId);
+	};
+	
 	return exports;
 }());

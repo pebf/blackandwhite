@@ -27,9 +27,10 @@ bw.process = (function() {
 		view.showWaitLayer();
 	};
 
-	exports.gameStart = function() {
-		//test
-		view.showRestartLayer();
+	exports.gameStart = function(htData) {
+		console.log('gameStart');
+		var htMatch = htData.htMatch;
+		view.showMatchInfo(htMatch);
 	};
 
 	exports.gameLeave = function() {

@@ -1,8 +1,10 @@
-var UserManager = require('./user_manager');
-var Match = require('./match');
+var User = require('./user')
+	, Match = require('./match');
 
 module.exports = function(server, io) {
-	var allClients = [];
+	var io = io
+		, allClients = [];
+
 
 	var init = function() {
 		io.listen(server);
@@ -16,27 +18,32 @@ module.exports = function(server, io) {
 	};
 
 	var receiveEnter = function(socket) {
-		var htUser = UserManager.createUser()
+		var htUser = User.createUser()
 			, htMatch = Match.joinMatch(htUser)
 			, sMatchId = htMatch.sMatchId;
 
 		socket.join(sMatchId);
+		console.log('sMatchId = ' + sMatchId);
 		setChannelInfo(socket, sMatchId, htUser.sUserId);
 		
 		socket.emit('enter_end', {
 			htUser : htUser
 			, htMatch : htMatch
 		});
-
-		if (Match.isMatchFull) {
-			socket.to(sMatchId)
-				.emit('game_start');
+		
+		if (Match.isMatchFull(htMatch)) {
+			initMatch(socket, htMatch);
 		}
+	};
+
+	var initMatch = function(socket, htMatch) {
+		Match.initMatch(htMatch);
+		io.to(htMatch.sMatchId)
+			.emit('game_start', {htMatch : htMatch});
 	};
 
 	var gameLeave = function(socket, htData) {		
 		var sMatchId = htData.sMatchId;
-
 		socket.leave(sMatchId);
 		Match.removePlayer(sMatchId, htData.sUserId);
 		socket.to(sMatchId).emit('opponent_leave');

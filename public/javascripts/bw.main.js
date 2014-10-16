@@ -63,7 +63,7 @@ bw.main = (function() {
 	};
 
 	exports.isMatchFull = function() {
-		if (htMatch.aPlayerList && htMatch.aPlayerList.length > 1) {
+		if (htMatch.aUserList && htMatch.aUserList.length > 1) {
 			return true;
 		}
 		return false;
