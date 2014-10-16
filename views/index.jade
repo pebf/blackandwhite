@@ -24,6 +24,10 @@ html(lang='ko')
               button._game_leave(type='button') 나가기
           .board_inner._board_wait(style='display: none;')
             p.only_txt 상대를 기다리는 중입니다.
+          .board_inner._board_opponent_input(style='display: none;')
+            p.only_txt 상대방이 숫자를 입력 중입니다.
+          .board_inner._board_user_input(style='display: none;')
+            p.only_txt 숫자를 입력해주세요(0 ~ {0})
           .board_inner._board_opponent_leave(style='display: none;')
             p.dbl_txt 상대방이 나갔습니다.
               br
