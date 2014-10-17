@@ -46,10 +46,7 @@ html(lang='ko')
               .lv._guage_block.on 20 ~ 0
             .number
               .value_wrap
-                .value ?
-              .input
-                input(type='text')
-                button(type='button') 입력
+                .value ?              
             .mark(style='display: none;')
               span.mrk_txt.mrk_blk_txt 흑
               span.mrk_txt.mrk_wht_txt 백
@@ -65,10 +62,20 @@ html(lang='ko')
               .value_wrap
                 .value ?
             .mark.on(style='display: none;')
-              span.mrk_txt.mrk_blk_txt 흑
+              span.mrk_txt.mrk_blk_txt 흑              
               span.mrk_txt.mrk_wht_txt 백
+      .user_wrap
+        .user_num
+          p 남은 숫자
+          p.num 99
+        .user_input
+          .user_input_wrap
+            input(type='text')
+            button(type='button') 입력
+
     script(type='text/javascript', src='/socket.io/socket.io.js')
     script(type='text/javascript', src='/javascripts/bw.main.js')
+    script(type='text/javascript', src='/javascripts/bw.util.js')
     script(type='text/javascript', src='/javascripts/bw.socket.js')
     script(type='text/javascript', src='/javascripts/bw.view.js')
     script(type='text/javascript', src='/javascripts/bw.process.js')

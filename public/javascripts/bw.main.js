@@ -47,7 +47,7 @@ bw.main = (function() {
 
 	exports.setData = function(htData) {
 		_setUser(htData.htUser);
-		_setMatch(htData.htMatch);
+		exports.setMatch(htData.htMatch);
 	};
 
 	var _setUser = function(htData) {
@@ -56,7 +56,7 @@ bw.main = (function() {
 		}
 	};
 
-	var _setMatch = function(htData) {
+	exports.setMatch = function(htData) {
 		for (key in htData) {
 			htMatch[key] = htData[key];
 		}
@@ -76,6 +76,32 @@ bw.main = (function() {
 	exports.getMatchId = function() {
 		return htMatch.sMatchId;
 	};
+
+	exports.isUserTurn = function() {
+		if (htMatch.aUserHasTurn[0] === htUser.sUserId) {
+			return true;
+		}
+
+		return false;
+	};
+
+	exports.getUserTotalNumber = function() {
+		return exports.getUserFromMatch().nTotalNumber;
+
+	};
+
+	exports.getUserFromMatch = function() {
+		console.log(htMatch);
+		
+		var aUserList = htMatch.aUserList;
+		console.log(aUserList);
+		if (aUserList[0].sUserId === htUser.sUserId) {
+			return aUserList[0];
+		}
+
+		return aUserList[1];
+	}
+	
 
 	return exports;
 }());

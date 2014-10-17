@@ -18,19 +18,23 @@ bw.process = (function() {
 	exports.receiveEnterEnd = function(htData) {
 		main.setData(htData);
 
-		if (main.isMatchFull()) {
-			//view.showGameLayer();			
-			view.showRestartLayer(); //test
-			return;
+		if (!main.isMatchFull()) {
+			view.showWaitLayer();
 		}
-
-		view.showWaitLayer();
 	};
 
 	exports.gameStart = function(htData) {
-		console.log('gameStart');
 		var htMatch = htData.htMatch;
+
+		main.setMatch(htMatch);
 		view.showMatchInfo(htMatch);
+
+		if (main.isUserTurn()) {
+			view.showUserInputLayer();
+		} else {
+			view.showOpponentInputLayer();
+		}
+
 	};
 
 	exports.gameLeave = function() {

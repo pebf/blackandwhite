@@ -1,8 +1,9 @@
 bw.view = (function() {
-	var main;
+	var main, util;
 
 	var _setDependency = function() {
 		main = bw.main;
+		util = bw.util;
 	};
 
 	var exports = {
@@ -23,6 +24,9 @@ bw.view = (function() {
 		_htElement.board_restart = _htElement.board.find('._board_restart');
 		_htElement.board_wait = _htElement.board.find('._board_wait');
 		_htElement.board_opponent_leave = _htElement.board.find('._board_opponent_leave');
+		_htElement.board_user_input = _htElement.board.find('._board_user_input');
+		_htElement.board_opponent_input = _htElement.board.find('._board_opponent_input');
+		
 
 		_htElement.user_score = $('._user_score');
 		_htElement.user_gauge = $('._user_guage');
@@ -52,6 +56,22 @@ bw.view = (function() {
 	exports.showOpponentLeaveLayer = function() {
 		_hideBoardInnerLayer();
 		_htElement.board_opponent_leave.show();
+	};
+
+	exports.showUserInputLayer = function() {
+		var str = '숫자를 입력해주세요(0 ~ {0})';		
+		str = util.replaceStr(str, [ main.getUserTotalNumber() ]);		
+		
+		_hideBoardInnerLayer();		
+		_htElement.board_user_input
+			.show()
+			.find('p')
+			.html(str);			
+	};
+
+	exports.showOpponentInputLayer = function() {
+		_hideBoardInnerLayer();
+		_htElement.board_opponent_input.show();
 	};
 
 	exports.showMatchInfo = function(htMatch) {		
